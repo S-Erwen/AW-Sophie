@@ -6,24 +6,28 @@
 
 let api = "http://localhost:5678/api";
 
-function press_check_cat(filter, id) {
-	f_work(id).then((data) => {
-		for (let i = 0; filter[i]; i++) {
-			data[i].remove();
+function press_check_cat(p_work, id) {
+	p_work.then((data) => {
+		var lenght = Object.keys(data).length;
+		var gallery = [lenght];
+
+		for (let i = 0; data[i]; i++) {
+			if (data[i])
+				data[i].remove();
+			// if (gallery[i])
+			// 	gallery[i].remove();
 		}
 		for (let i = 0; data[i]; i++) {
-			var lenght = Object.keys(data).length;
-			var gallery = [lenght];
-	
-			if (id == i) {
+			console.log("ID = " + id);
+			console.log("DATA CID = " + data[i].categoryId);
+			if (id == data[i].categoryId) {
 				gallery[i] = document.createElement("figure");
-				console.log(gallery);
 				gallery[i].innerHTML = `<img crossorigin="anonymous" src="${data[i].imageUrl}" alt="${data[i].title}"><figcaption>${data[i].title}</figcaption>`;
-		
+			
 				document.getElementById("gallery").appendChild(gallery[i]);
 			}
 		}
-	});
+		});
 
 }
 
@@ -31,7 +35,7 @@ function set_categories(data) {
 	var lenght = Object.keys(data).length;
 	var filter = [lenght];
 
-	f_work(0);
+	var p_work = f_work(0);
 	if (!lenght)
 		console.log("NO DATA_CAT");
 
@@ -42,7 +46,7 @@ function set_categories(data) {
 	
 		filter[i].classList.add(name.replaceAll(' ', '_'));
 		filter[i].innerHTML = name;
-		filter[i].onclick = function () {press_check_cat(filter, i)};
+		filter[i].onclick = function () {press_check_cat(p_work, i + 1)};
 
 		document.getElementById("filter").appendChild(filter[i]);
 	}
@@ -56,10 +60,14 @@ function set_works(data, id) {
 		console.log("NO DATA_WORK");
 
 	for (let i = 0; i < lenght; i++) {
-		if (id == i || !id) {
+		if (id == data[i].categoryId || !id) {
 			gallery[i] = document.createElement("figure");
 			gallery[i].innerHTML = `<img crossorigin="anonymous" src="${data[i].imageUrl}" alt="${data[i].title}"><figcaption>${data[i].title}</figcaption>`;
 			document.getElementById("gallery").appendChild(gallery[i]);
+
+			gallery[i].categoryId = data[i].categoryId;
+			gallery[i].imageUrl = data[i].imageUrl;
+			gallery[i].title = data[i].title;
 		}
 	}
 	return (gallery);
