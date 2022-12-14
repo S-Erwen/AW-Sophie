@@ -132,6 +132,10 @@ li:hover {
 	margin-top: 50px;
 	margin-bottom: 50px;
 }
+#portfolio #filter .set {
+	background-color: #1D6154;
+	color: white;
+}
 #portfolio button {
 	height: 37px;
 
