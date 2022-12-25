@@ -1,0 +1,85 @@
+nav a #login {
+	font-weight: 600;
+	color: black;
+	text-decoration: none;
+}
+
+main #login {
+	margin-top: 150px;
+	justify-content: center;
+	height: 650px;
+}
+main #login h2{
+	height: 40px;
+	text-align: center;
+	margin-bottom: 50px;
+}
+main #login #log {
+	justify-content: center;
+	align-content: center;
+	text-align: center;
+}
+main #login input {
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+
+	width: 379px;
+	height: 51px;
+
+	margin-bottom: 30px;
+	margin-top: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+
+	border: none;
+}
+
+main #login input:focus {
+	border: 2px solid #1d6154af;
+	outline: none;
+}
+
+main .info {
+	text-align: start;
+
+	margin: auto;
+	width: 410px;
+}
+
+main .sub {
+	/* position: absolute; */
+	display: block;
+	
+	margin: auto;
+	width: 179px;
+	height: 36px;
+
+	background: #1D6154;
+	border-radius: 60px;
+	border: none;
+	cursor: pointer;
+
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 14px;
+	line-height: 17px;
+	
+	color: white;
+}
+
+main .mdp_miss {
+	margin-top: 30px;
+	color: black;
+}
+
+#err {
+	display: block;
+
+	text-align: center;
+	color: red;
+	margin-top: 20px;
+}
+
+#login {
+	display: none;
+}
