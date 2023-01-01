@@ -26,34 +26,60 @@
 <main>
 	<div id="index">
 		<section id="introduction">
-		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
-		</figure>
-		<article>
-			<h2>Designer d'espace</h2>
-			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
-		</article>
+			<figure id="title_img">
+				<img src="./assets/images/sophie-bluel.png" alt="">
+			</figure>
+			<article>
+				<h2>
+					<p id="title_article">Designer d'espace</p>
+				</h2>
+				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
+				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+			</article>
 		</section>
 		<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div id="filter">
-		</div>
-		<div class="gallery" id="gallery"></div>
+			<h2 id="projets">Mes Projets</h2>
+			<div id="filter"></div>
+			<div class="gallery" id="gallery"></div>
 		</section>
+		<dialog class="modal" id="modal">
+			<img id="back" src="./assets/icons/icons8-left-arrow-30.png">
+			<img id="quit" src="./assets/icons/symbole-x.png">
+			<div class="gallery_pic">
+				<h2 id="mod_title">Galerie photo</h2>
+				<div class="picture" id="picture"></div>
+				<div class="bar"></div>
+				<button class="add_pic">Ajouter une photo</button>
+				<div clas="delete_pic">Supprimer la galerie</div>
+			</div>
+			<div class="add_pic">
+				<div class="background_add">
+					<button class="add_picture">+ Ajouter photo</button>
+					<p>jpg, png : 4mo max</p>
+					<form id="add_pic_form" method="post">
+						<div class="t_pic">Titre</div>
+						<input type="text" name="titre" id="titre">
+						<div id="cat_pick">Catégorie</div>
+						<div id="option"></div>
+						<div class="bar"></div>
+						<button class="valid">Valider</button>
+					</form>
+				</div>
+			</div>
+		</dialog>
 		<section id="contact">
-		<h2>Contact</h2>
-		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
-			<label for="name">Nom</label>
-			<input type="text" name="name" id="name">
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
-			<label for="message">Message</label>
-			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Envoyer">
-		</form>
+			<h2>Contact</h2>
+			<p>Vous avez un projet ? Discutons-en !</p>
+			<form action="#" method="post">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" cols="30" rows="10"></textarea>
+				<input type="submit" value="Envoyer">
+			</form>
 		</section>
 	</div>
 	<div id="login">

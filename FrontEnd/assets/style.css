@@ -286,3 +286,72 @@ footer nav ul {
 	font-family: 'Work Sans';
 	font-size: 14px;
 }
+
+#modify {
+	cursor: pointer;
+}
+
+#modify img {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+}
+
+#modif {
+	font-family: 'Work Sans';
+	font-size: 14px;
+	color: black;
+	font-weight: 400;
+
+
+	margin-left: 27px;
+	padding-top: 3px;
+}
+
+.id_0 {
+	position: absolute;
+	margin-top: -40px;
+}
+
+.id_1 {
+	position: relative;
+	/* background: red; */
+	flex: 1;
+
+	margin-left: 55px;
+	margin-top: 10px;
+}
+
+.id_2 {
+	position: absolute;
+	display: initial;
+	text-align: start;
+	/* background: red; */
+
+	margin-left: 20px;
+	margin-top: 7px;
+}
+
+@media screen and (max-width: 1140px) {
+	.id_1 {
+		margin-left: 10%;
+	}
+}
+
+.modal {
+	width: 630px;
+	height: 730px;
+
+	background: #FFFFFF;
+	border-radius: 10px;
+	/* border: none; */
+}
+
+.picture img{
+	width: 105px;
+	background-color: red;
+}
+
+.add_pic {
+	display: none;
+}

@@ -17,7 +17,10 @@ function set_categories(data_cat) {
 	var filter = [lenght];
 	var data_gallery = f_work(0);
 	let name;
+	var option = document.createElement("select");
 
+	option.setAttribute("id", "cat");
+	option.setAttribute("name", "cat");
 	if (!lenght)
 		console.log("NO DATA_CAT");
 	for (let i = 0; i < lenght + 1; i++) {
@@ -26,9 +29,12 @@ function set_categories(data_cat) {
 		{
 			name = "Tous";
 			filter[i].classList.add("set");
+			filter[i].setAttribute("id", "Tous");
 		}
-		else
+		else {
 			name = data_cat[i - 1].name;
+			option.innerHTML += `<option value="${name}">${name}</option>`;
+		}
 		filter[i].classList.add(name.replaceAll(' ', '_'));
 		filter[i].innerHTML = name;
 		filter[i].onclick = function () {
@@ -36,7 +42,8 @@ function set_categories(data_cat) {
 			if (data_gallery) {
 				data_gallery.then((data_g) => {
 					for (let i = 0; data_g[i]; i++)
-						data_g[i].remove();
+						for (let y = 0; data_g[i][y]; y++)
+							data_g[i][y].remove();
 					data_g = [];
 				});
 				data_gallery = f_work(i);
@@ -44,23 +51,30 @@ function set_categories(data_cat) {
 		};
 		document.getElementById("filter").appendChild(filter[i]);
 	}
+	document.getElementById("option").appendChild(option);
 }
 
 function set_works(data_work, id) {
 	var lenght = Object.keys(data_work).length;
-	var gallery = [lenght];
+	// var gallery = [lenght];
+	var gallery = new Array(2);
+	gallery[0] = new Array(lenght);
+	gallery[1] = new Array(lenght);
 
 	if (!lenght)
 		console.log("NO_DATA_WORK");
 	let y = 0;
 	for (let i = 0; i < lenght; i++) {
 		if (id == data_work[i].categoryId || !id) {
-			gallery[y] = document.createElement("figure");
-			gallery[y].imageUrl = data_work[i].imageUrl;
-			gallery[y].title = data_work[i].title;
-
-			gallery[y].innerHTML = `<img crossorigin="anonymous" src="${gallery[y].imageUrl}" alt="${gallery[y].title}"><figcaption>${gallery[y].title}</figcaption>`;
-			document.getElementById("gallery").appendChild(gallery[y]);
+			gallery[0][y] = document.createElement("figure");
+			gallery[0][y].imageUrl = data_work[i].imageUrl;
+			gallery[0][y].title = data_work[i].title;
+			gallery[0][y].innerHTML = `<img crossorigin="anonymous" src="${gallery[0][y].imageUrl}" alt="${gallery[0][y].title}"><figcaption>${gallery[0][y].title}</figcaption>`;
+			document.getElementById("gallery").appendChild(gallery[0][y]);
+			if (!id) {
+				gallery[1][y] = gallery[0][y].cloneNode(true);
+				document.getElementById("picture").appendChild(gallery[1][y]);
+			}
 			y++;
 		}
 	}
@@ -127,14 +141,69 @@ function log_err() {
 	return (null);
 }
 
-function add_custom() {
-	var edit = document.createElement("div");
+function modal_p(res) {
+	if (!res)
+		return (alert("NO TOKEN AVAILABLE"));
+	
+	var modal = document.getElementById("modal");
+
+	modal.showModal();
+	document.getElementById('quit').addEventListener('click', () => {
+		modal.close();
+	})
+}
+
+function createMod(i, res) {
+
+	let mod = document.createElement("div");
+	let parentDiv;
+	let el;
+	
+	if (!i) {
+		parentDiv = document.getElementById("title_article").parentNode;
+		el = 'title_article';
+	} else if (i == 1) {
+		parentDiv = document.getElementById("title_img");
+		el = 'title_img';
+	} else {
+		parentDiv = document.getElementById("projets");
+		el = 'projets';
+		mod.onclick = function () {modal_p(res)}
+	}
+
+	mod.setAttribute("id", "modify");
+	mod.setAttribute("class", `id_${i}`);
+	mod.innerHTML = ` <img crossorigin="anonymous" src="assets/icons/icon-edit.png">\
+		<p id="modif">modifier</p>`;
+
+	if (!i)
+		parentDiv.insertBefore(mod, document.getElementById(el));
+	else
+		parentDiv.appendChild(mod);
+}
+
+setTimeout(() => {
+	add_custom();
+	}, 2000)
+
+// add_custom();
+
+function add_custom(res) {
+	document.getElementById('Tous').click();
+	document.getElementById('filter').style.display = 'none';
+	document.getElementById('projets').style.marginBottom = '100px';
+
+	let edit = document.createElement("div");
 
 	document.getElementById("header").style.marginTop = "100px";
 	edit.setAttribute("id", "edit");
 	edit.innerHTML = `<img crossorigin="anonymous" src="assets/icons/icon-edit.png">\
 		<p>Mode édition</p><button id="save" type="submit">publier les changements</button>`;
 	document.getElementById("header").insertBefore(edit, document.getElementById('title'));
+
+	createMod(0, null);
+	createMod(1, null);
+	createMod(2, res);
 }
 
 async function log_res(res) {
@@ -147,8 +216,7 @@ async function log_res(res) {
 	document.getElementById("logi").onclick = function() {
 		window.location.href = "index.html";
 	}
-	add_custom();
-	return (res);
+	add_custom(res);
 }
 
 const log = document.getElementById('log');
