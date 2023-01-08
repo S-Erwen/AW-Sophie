@@ -1,5 +1,5 @@
 let api = "http://localhost:5678/api";
-
+var removeList = [];
 // get cat and fitlers
 
 function set_color_cat(filter, i) {
@@ -63,7 +63,7 @@ function set_works(data_work, id) {
 
 	if (!lenght)
 		console.log("NO_DATA_WORK");
-	let y = 0;
+	var y = 0;
 	for (let i = 0; i < lenght; i++) {
 		if (id == data_work[i].categoryId || !id) {
 			gallery[0][y] = document.createElement("figure");
@@ -73,9 +73,27 @@ function set_works(data_work, id) {
 			document.getElementById("gallery").appendChild(gallery[0][y]);
 			if (!id) {
 				gallery[1][y] = gallery[0][y].cloneNode(true);
+				gallery[1][y].innerHTML = `<img crossorigin="anonymous" class="trash" id="trash_${y}" src="./assets/icons/icons8-trash-can-48.png" alt="trash">\
+				<img crossorigin="anonymous" class="pics" src="${gallery[0][y].imageUrl}" alt="${gallery[0][y].title}"><figcaption>éditer</figcaption>`;
 				document.getElementById("picture").appendChild(gallery[1][y]);
+				(function(y) {
+					document.getElementById(`trash_${y}`).onclick = function() {
+						console.log(gallery[0][y]);
+						gallery[0][y].remove();
+						gallery[1][y].remove();
+						removeList.push(y);
+					};
+				})(y);
 			}
 			y++;
+		}
+	}
+	document.getElementById("deletep").onclick = function() {
+		removeList = [];
+		for (let d = 0; d < lenght; d++) {
+			removeList.push(d);
+			gallery[0][d].remove();
+			gallery[1][d].remove();
 		}
 	}
 	return (gallery);
@@ -142,8 +160,12 @@ function log_err() {
 }
 
 function modal_p(res) {
-	if (!res)
+	if (!res) {
+		setTimeout(() => {
+			window.location.href = "index.html";
+		}, 5000)
 		return (alert("NO TOKEN AVAILABLE"));
+	}
 	
 	var modal = document.getElementById("modal");
 
@@ -182,9 +204,9 @@ function createMod(i, res) {
 		parentDiv.appendChild(mod);
 }
 
-setTimeout(() => {
-	add_custom();
-	}, 2000)
+// setTimeout(() => {
+// 	add_custom();
+// 	}, 2000)
 
 // add_custom();
 
@@ -201,6 +223,10 @@ function add_custom(res) {
 		<p>Mode édition</p><button id="save" type="submit">publier les changements</button>`;
 	document.getElementById("header").insertBefore(edit, document.getElementById('title'));
 
+	edit.addEventListener('click', () => {
+		// delete first
+		console.log(removeList);
+	})
 	createMod(0, null);
 	createMod(1, null);
 	createMod(2, res);

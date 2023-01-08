@@ -160,6 +160,7 @@ li:hover {
 
 	font-family: 'Syne';
 	font-size: 16px;
+	font-weight: 700;
 
 	background-color: white;
 	color: #1D6154;
@@ -347,11 +348,128 @@ footer nav ul {
 	/* border: none; */
 }
 
-.picture img{
-	width: 105px;
+#mod_title {
+	font-family: 'Work Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 26px;
+	line-height: 30px;
+	text-align: center;
+	color: black;
+}
+
+.picture {
+	/* margin-left: 105px; */
+	margin-left: 17%;
+	margin-top: 46px;
+	display: flex;
+	flex-wrap: wrap;
+	width: 80%;
+}
+
+.picture figure {
+	padding-bottom: 11px;
+}
+
+.picture figcaption {
+	padding-top: 2px;
+	font-size: 12px;
+
+}
+
+.picture .pics {
+	margin-right: 6.2px;
+	width: 78.12px;
+	height: 104.08px;
+
 	background-color: red;
 }
 
 .add_pic {
 	display: none;
+}
+
+#back {
+	display: none;
+}
+
+#quit {
+	position: absolute;
+	width: 12px;
+	height: 12px;
+
+	right: 0%;
+	margin-right: 36px;
+	margin-top: 32px;
+}
+
+.gallery_pic {
+	position: relative;
+
+	/* background-color: purple; */
+	margin-top: 50px;
+	/* position: relative; */
+}
+
+.bar {
+	position: absolute;
+	width: 420px;
+	height: 0px;
+	margin-top: 75px;
+	margin-left: 17%;
+
+	border: 1px solid #B3B3B3;
+}
+
+@media screen and (max-width: 570px) {
+	.bar {
+		width: 330px;
+	}
+}
+
+@media screen and (max-width: 475px) {
+	.bar {
+		width: 240px;
+	}
+}
+
+.add_p {
+	width: 237px;
+	height: 36px;
+	display: block;
+	margin: auto;
+	margin-top: 115px;
+	background: #1D6154;
+	border-radius: 60px;
+	border: none;
+	cursor: pointer;
+	font-family: 'Syne';
+	font-size: 14px;
+	color: white;
+}
+
+.delete_pic {
+	font-family: 'Syne';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 17px;
+
+	margin-top: 20px;
+	text-align: center;
+	cursor: pointer;
+
+	color: #D65353;
+}
+
+.trash {
+	position: absolute;
+	width: 17px;
+	height: 17px;
+
+	display: flex;
+	margin-left: 55px;
+	margin-top: 5px;
+	border-radius: 3px;
+
 }
